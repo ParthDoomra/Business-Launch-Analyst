@@ -1,0 +1,40 @@
+Build the frontend for a Multi-Agent Business Assistant — an AI tool that helps business 
+owners decide whether to launch a product, by running multiple specialized AI agents that 
+analyze the decision from different angles and combine their findings into one 
+recommendation.
+
+PAGES:
+
+1. Home page:
+   - Short hero section: "AI-powered business launch analysis" with a one-line description
+   - Simple "How it works" section: 3 steps — Ask a question → Agents analyze in parallel → 
+     Get a clear recommendation
+   - A "Try it" button that leads to the analysis page
+
+2. Analysis page:
+   - Text input for the user's business question (e.g. "Should I launch a smartwatch at 
+     ₹2,999 if my manufacturing cost is ₹1,500? I expect to sell 500 units a month") + an 
+     "Analyze" button
+   - While processing: show each relevant agent (Finance, Market) as a card with a status 
+     (pending → running → done), since this can take a few seconds — market research 
+     involves a live web search
+   - Each agent's card shows its own result once done (Finance: revenue, cost, profit, 
+     margin %. Market: market size, competitors, opportunities, risks)
+   - A final "Report" card once everything completes, showing: market potential, 
+     recommended price, estimated margin, main risk, and a clear LAUNCH / DO NOT LAUNCH 
+     badge
+
+Simple nav bar with the app name, linking back to home from the analysis page. No auth, 
+no settings, no other pages — keep this to exactly these two pages.
+
+BACKEND CONNECTION:
+This connects to an EXTERNAL REST API — do not create a Supabase backend or database, 
+this app has no data layer of its own. The API base URL will be provided via env var 
+VITE_API_BASE. It exposes:
+- POST {VITE_API_BASE}/orchestrate — body: {"query": string} — returns each agent's raw 
+  result plus the final report
+
+DESIGN:
+Dark theme, clean and professional, feels like a lightweight AI business-analyst tool 
+rather than a form-heavy dashboard. Mobile-responsive. Use your judgment on layout and 
+visual hierarchy.

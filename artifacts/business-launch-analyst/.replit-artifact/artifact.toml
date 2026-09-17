@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Business Launch Analyst"
+description = "A dark, focused AI business analyst that helps owners decide whether to launch a product by combining finance and market analysis into one clear recommendation."
+version = "1.0.0"
+id = "artifacts/business-launch-analyst"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24756
+
+[services.development]
+run = "pnpm --filter @workspace/business-launch-analyst run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/business-launch-analyst", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/business-launch-analyst/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24756"
+BASE_PATH = "/"
